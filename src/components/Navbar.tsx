@@ -28,7 +28,7 @@ export default function Navbar() {
     >
       <div className="mx-auto flex h-full max-w-[1440px] items-center justify-between px-4 lg:px-6">
         <Link to="/" className="flex items-center gap-2.5" aria-label="Lingo Cards — на главную">
-          <img src={`${import.meta.env.BASE_URL}logo.svg`} alt="" className="h-7 w-7 text-ink" />
+          <Logo className="h-7 w-7 text-ink" />
           <span className="hidden font-display text-[18px] font-semibold tracking-[-0.01em] sm:inline">
             Lingo Cards
           </span>
