@@ -1,31 +1,34 @@
-// SM-2 spaced repetition + Dexie (IndexedDB) persistence.
-// DB name: lingo-cards (see design/engineering.md).
+// Local progress DB (Dexie/IndexedDB) + simplified SM-2 engine.
+// Contract: design/engineering.md.
 
-import Dexie, { type EntityTable } from 'dexie';
+import Dexie, { type Table } from 'dexie';
 
-export type Grade = 'good' | 'unsure' | 'bad';
-export type Mode = 'def2term-input' | 'def2term-choice' | 'term2def-choice' | 'term2def-precision';
 export type ProgressStatus = 'new' | 'learning' | 'learned' | 'weak' | 'due';
+export type Grade = 'good' | 'unsure' | 'bad';
+export type Mode =
+  | 'def2term-input'
+  | 'def2term-choice'
+  | 'term2def-choice'
+  | 'term2def-precision';
 
 export interface TermProgress {
-  termId: string;
-  ease: number; // SM-2 easiness factor, start 2.5
+  termId: string; // PK
+  status: ProgressStatus;
+  easiness: number; // SM-2, starts at 2.5
   interval: number; // days
-  nextReview: number; // epoch ms
-  reps: number;
-  lapses: number;
-  correctStreak: number;
-  lastGrade: Grade | null;
-  lastReviewed: number; // epoch ms, 0 = never
+  repetitions: number;
+  nextReview: number; // timestamp
+  lastResult: Grade | null;
   correctCount: number;
   wrongCount: number;
+  favorite: boolean;
 }
 
 export interface SessionAnswer {
   termId: string;
   mode: Mode;
   ok: boolean;
-  score?: number; // precision percent (term2def-precision)
+  score?: number; // precision percent for term2def-precision
 }
 
 export interface SessionRecord {
@@ -38,95 +41,95 @@ export interface SessionRecord {
   answers: SessionAnswer[];
 }
 
-export interface MetaEntry {
-  key: string;
-  value: unknown;
+class LingoCardsDB extends Dexie {
+  progress!: Table<TermProgress, string>;
+  sessions!: Table<SessionRecord, number>;
+
+  constructor() {
+    super('lingo-cards');
+    this.version(1).stores({
+      progress: 'termId, status, nextReview',
+      sessions: '++id, startedAt, finishedAt',
+    });
+  }
 }
 
-export const db = new Dexie('lingo-cards') as Dexie & {
-  progress: EntityTable<TermProgress, 'termId'>;
-  sessions: EntityTable<SessionRecord, 'id'>;
-  meta: EntityTable<MetaEntry, 'key'>;
-};
+export const db = new LingoCardsDB();
 
-db.version(1).stores({
-  progress: 'termId, nextReview, lastReviewed',
-  sessions: '++id, finishedAt',
-  meta: 'key',
-});
+const DAY_MS = 86_400_000;
 
-// ---------- SM-2 ----------
-
+/** Default SM-2 state for a term that has never been trained. */
 export function freshProgress(termId: string): TermProgress {
   return {
     termId,
-    ease: 2.5,
+    status: 'new',
+    easiness: 2.5,
     interval: 0,
+    repetitions: 0,
     nextReview: 0,
-    reps: 0,
-    lapses: 0,
-    correctStreak: 0,
-    lastGrade: null,
-    lastReviewed: 0,
+    lastResult: null,
     correctCount: 0,
     wrongCount: 0,
+    favorite: false,
   };
 }
 
-/** SM-2 quality: good=5, unsure=3, bad=1. */
+/**
+ * Simplified SM-2 (engineering.md):
+ * - bad:    reps=0, interval=1, easiness=max(1.3, e-0.2), status='weak'
+ * - unsure: interval=max(1, round(i*1.2)), easiness=max(1.3, e-0.15), reps+=1, status='learning'
+ * - good:   reps+=1; interval = reps==1 ? 1 : reps==2 ? 3 : round(prev*e);
+ *           easiness += 0.1 - 0.08*qualityAdjust; status='learning',
+ *           if interval>=14 and reps>=3 -> 'learned'
+ */
 export function applyGrade(p: TermProgress, grade: Grade, now: number = Date.now()): TermProgress {
-  const q = grade === 'good' ? 5 : grade === 'unsure' ? 3 : 1;
-  const next: TermProgress = { ...p, lastGrade: grade, lastReviewed: now };
-
-  if (grade === 'good') {
-    next.correctCount += 1;
-    next.correctStreak += 1;
-    next.reps += 1;
-  } else if (grade === 'unsure') {
-    // повторение засчитано, серия и интервал не растут
-    next.reps += 1;
-  } else {
-    next.wrongCount += 1;
-    next.correctStreak = 0;
-    next.lapses += 1;
-  }
-
-  next.ease = Math.max(1.3, p.ease + (0.1 - (5 - q) * (0.08 + (5 - q) * 0.02)));
-
-  if (grade === 'good') {
-    next.interval =
-      p.lastGrade === null || p.interval === 0 ? 1 : p.interval < 6 ? 6 : Math.round(p.interval * next.ease);
-  } else if (grade === 'unsure') {
-    next.interval = Math.max(1, Math.round((p.interval || 1) * 0.5));
-  } else {
+  const next: TermProgress = { ...p, lastResult: grade };
+  if (grade === 'bad') {
+    next.repetitions = 0;
     next.interval = 1;
+    next.easiness = Math.max(1.3, p.easiness - 0.2);
+    next.status = 'weak';
+    next.wrongCount = p.wrongCount + 1;
+  } else if (grade === 'unsure') {
+    next.repetitions = p.repetitions + 1;
+    next.interval = Math.max(1, Math.round(p.interval * 1.2));
+    next.easiness = Math.max(1.3, p.easiness - 0.15);
+    next.status = 'learning';
+    next.wrongCount = p.wrongCount + 1;
+  } else {
+    const reps = p.repetitions + 1;
+    next.repetitions = reps;
+    next.interval = reps === 1 ? 1 : reps === 2 ? 3 : Math.round(p.interval * p.easiness);
+    next.easiness = Math.min(3.0, Math.max(1.3, p.easiness + 0.1));
+    next.status = next.interval >= 14 && reps >= 3 ? 'learned' : 'learning';
+    next.correctCount = p.correctCount + 1;
   }
-
-  next.nextReview = now + next.interval * 86_400_000;
+  next.nextReview = now + next.interval * DAY_MS;
   return next;
 }
 
-export function computeStatus(p: TermProgress | undefined, now: number = Date.now()): ProgressStatus {
-  if (!p || p.lastReviewed === 0) return 'new';
-  if (p.lastGrade === 'bad') return 'weak';
-  if (p.lastGrade === 'good' && p.interval >= 21) return now >= p.nextReview ? 'due' : 'learned';
-  return now >= p.nextReview ? 'due' : 'learning';
+/**
+ * 'due' is computed, not stored: a learned/learning term whose nextReview has
+ * passed is shown as "пора повторить". 'weak' stays 'weak' until retrained.
+ */
+export function computeStatus(p: TermProgress, now: number = Date.now()): ProgressStatus {
+  if (p.status === 'new' || p.status === 'weak') return p.status;
+  if (p.repetitions > 0 && p.nextReview > 0 && p.nextReview <= now) return 'due';
+  return p.status;
 }
 
-// ---------- persistence helpers ----------
-
-export async function getProgress(termId: string): Promise<TermProgress | undefined> {
-  return db.progress.get(termId);
+/** Convenience: load all progress rows, filling gaps with fresh 'new' entries. */
+export async function getProgressMap(termIds?: string[]): Promise<Map<string, TermProgress>> {
+  const rows = await db.progress.toArray();
+  const map = new Map(rows.map((r) => [r.termId, r]));
+  if (termIds) {
+    for (const id of termIds) if (!map.has(id)) map.set(id, freshProgress(id));
+  }
+  return map;
 }
 
 export async function saveProgress(p: TermProgress): Promise<void> {
   await db.progress.put(p);
-}
-
-/** Load progress for the given term ids (undefined ids → all). */
-export async function getProgressMap(ids?: string[]): Promise<Map<string, TermProgress>> {
-  const rows = ids ? await db.progress.where('termId').anyOf(ids).toArray() : await db.progress.toArray();
-  return new Map(rows.map((r) => [r.termId, r]));
 }
 
 export async function saveSession(s: SessionRecord): Promise<number> {
