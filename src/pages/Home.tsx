@@ -290,7 +290,7 @@ export default function Home() {
                   transition={{ delay: 0.06 * i, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                 >
                   {w}
-                  {i === 0 ? ' ' : ''}
+                  {i === 0 ? ' ' : ''}
                 </motion.span>
               ))}
           </h1>
