@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900" fill="none">
+  <!-- Scattered term-cards joined by thin arcs into a constellation-graph; 4 cards tinted with topic colors -->
+  <defs>
+    <style>
+      .ink { stroke: #2A2420; }
+      .arc { stroke: #2A2420; stroke-width: 1.5; stroke-linecap: round; opacity: .55; fill: none; }
+      .card { fill: none; stroke: #2A2420; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+      .rule { stroke: #2A2420; stroke-width: 1.5; stroke-linecap: round; opacity: .4; }
+      .dot { fill: #2A2420; }
+    </style>
+  </defs>
+
+  <!-- connecting arcs -->
+  <path class="arc" d="M236 300 C 340 220, 470 210, 560 268"/>
+  <path class="arc" d="M600 300 C 660 380, 720 420, 810 430"/>
+  <path class="arc" d="M300 380 C 360 480, 440 540, 540 560"/>
+  <path class="arc" d="M880 470 C 920 560, 900 640, 830 700"/>
+  <path class="arc" d="M600 600 C 680 640, 740 660, 792 690"/>
+  <path class="arc" d="M560 320 C 640 300, 760 300, 880 330"/>
+  <path class="arc" d="M250 350 C 220 460, 260 560, 360 620"/>
+  <path class="arc" d="M400 660 C 460 640, 510 620, 552 596"/>
+
+  <!-- node dots on arcs -->
+  <circle class="dot" cx="560" cy="268" r="4"/>
+  <circle class="dot" cx="810" cy="430" r="4"/>
+  <circle class="dot" cx="792" cy="690" r="4"/>
+  <circle class="dot" cx="880" cy="330" r="4"/>
+
+  <!-- card 1: grammar (terracotta) -->
+  <g transform="rotate(-7 200 330)">
+    <rect x="120" y="280" width="160" height="104" rx="12" fill="#B0705A" opacity="0.14"/>
+    <rect class="card" x="120" y="280" width="160" height="104" rx="12"/>
+    <path class="rule" d="M140 312h120M140 332h84M140 352h102"/>
+  </g>
+
+  <!-- card 2: phonetics (sage) -->
+  <g transform="rotate(5 580 300)">
+    <rect x="500" y="252" width="160" height="104" rx="12" fill="#7D8F69" opacity="0.14"/>
+    <rect class="card" x="500" y="252" width="160" height="104" rx="12"/>
+    <path class="rule" d="M520 284h120M520 304h84M520 324h102"/>
+  </g>
+
+  <!-- card 3: lexicology (ochre) -->
+  <g transform="rotate(-4 560 580)">
+    <rect x="480" y="532" width="160" height="104" rx="12" fill="#A08A5B" opacity="0.14"/>
+    <rect class="card" x="480" y="532" width="160" height="104" rx="12"/>
+    <path class="rule" d="M500 564h120M500 584h84M500 604h102"/>
+  </g>
+
+  <!-- card 4: stylistics (dusty lilac) -->
+  <g transform="rotate(6 850 450)">
+    <rect x="770" y="402" width="160" height="104" rx="12" fill="#8A7A9E" opacity="0.14"/>
+    <rect class="card" x="770" y="402" width="160" height="104" rx="12"/>
+    <path class="rule" d="M790 434h120M790 454h84M790 474h102"/>
+  </g>
+
+  <!-- plain cards -->
+  <g transform="rotate(3 900 320)">
+    <rect class="card" x="840" y="276" width="120" height="80" rx="10"/>
+    <path class="rule" d="M856 300h88M856 318h60"/>
+  </g>
+  <g transform="rotate(-5 350 640)">
+    <rect class="card" x="290" y="602" width="120" height="80" rx="10"/>
+    <path class="rule" d="M306 626h88M306 644h60"/>
+  </g>
+  <g transform="rotate(2 830 720)">
+    <rect class="card" x="770" y="682" width="120" height="80" rx="10"/>
+    <path class="rule" d="M786 706h88M786 724h60"/>
+  </g>
+
+  <!-- faint far stars -->
+  <circle class="dot" cx="1040" cy="200" r="3" opacity=".45"/>
+  <circle class="dot" cx="180" cy="540" r="3" opacity=".45"/>
+  <circle class="dot" cx="1020" cy="600" r="3" opacity=".45"/>
+  <circle class="dot" cx="400" cy="160" r="3" opacity=".45"/>
+</svg>

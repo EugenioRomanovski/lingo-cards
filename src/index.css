@@ -1,0 +1,160 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* design.md §2.1 — light theme (default) */
+    --bg: #F5F0E6;
+    --surface: #FDFBF5;
+    --surface-2: #EFE8D9;
+    --surface-3: #E7DFCD;
+    --border: #E2D9C6;
+    --border-strong: #CFC3AC;
+    --text: #2A2420;
+    --text-muted: #756A5C;
+    --text-faint: #A79B8A;
+    --accent: #B0705A;
+    --accent-hover: #9A5D49;
+    --accent-soft: rgba(176, 112, 90, 0.12);
+    --accent-ink: #7E4634;
+
+    /* statuses (§2.4) */
+    --st-learned: #5E8A58;
+    --st-learning: #C79A3D;
+    --st-weak: #C05B4D;
+    --st-due: #4E7FA6;
+    --st-new: #A79B8A;
+    --st-due-soft: rgba(78, 127, 166, 0.35);
+
+    /* semantic (§2.5) */
+    --success: #5E8A58;
+    --error: #C05B4D;
+    --warning: #C79A3D;
+    --info: #4E7FA6;
+
+    /* topic colors (§2.3) */
+    --topic-grammar: #B0705A;
+    --topic-phonetics: #7D8F69;
+    --topic-lexicology: #A08A5B;
+    --topic-stylistics: #8A7A9E;
+    --topic-alpha: 0.14;
+
+    --shadow-sm: 0 1px 2px rgba(58, 44, 30, 0.06);
+    --shadow-md: 0 2px 6px rgba(58, 44, 30, 0.06), 0 10px 28px rgba(58, 44, 30, 0.08);
+    --shadow-lg: 0 4px 12px rgba(58, 44, 30, 0.08), 0 24px 56px rgba(58, 44, 30, 0.12);
+
+    --radius: 0.75rem;
+    --texture-opacity: 0.035;
+  }
+
+  [data-theme="dark"] {
+    --bg: #1B1814;
+    --surface: #25211B;
+    --surface-2: #2E2820;
+    --surface-3: #383126;
+    --border: #3A3429;
+    --border-strong: #54493A;
+    --text: #EDE6D8;
+    --text-muted: #A89C8B;
+    --text-faint: #6E6455;
+    --accent: #CD8B71;
+    --accent-hover: #DE9E84;
+    --accent-soft: rgba(205, 139, 113, 0.16);
+    --accent-ink: #E0A78D;
+
+    --st-learned: #86AC7F;
+    --st-learning: #D9B465;
+    --st-weak: #D97F6F;
+    --st-due: #7AA3C4;
+    --st-new: #6E6455;
+    --st-due-soft: rgba(122, 163, 196, 0.35);
+
+    --success: #86AC7F;
+    --error: #D97F6F;
+    --warning: #D9B465;
+    --info: #7AA3C4;
+
+    --topic-grammar: #CE8F79;
+    --topic-phonetics: #9DAF86;
+    --topic-lexicology: #C2A97B;
+    --topic-stylistics: #AB9DBE;
+    --topic-alpha: 0.2;
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
+    --shadow-md: 0 2px 6px rgba(0, 0, 0, 0.35), 0 10px 28px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.4), 0 24px 56px rgba(0, 0, 0, 0.5);
+
+    --texture-opacity: 0.05;
+  }
+
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: Manrope, system-ui, sans-serif;
+    transition: background-color 200ms ease, color 200ms ease;
+  }
+
+  /* paper texture (§7): feTurbulence tile over the page background */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image: url("/texture-paper.svg");
+    background-size: 180px 180px;
+    opacity: var(--texture-opacity);
+  }
+
+  #root {
+    position: relative;
+    z-index: 1;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .font-display {
+    font-family: Spectral, Georgia, serif;
+  }
+
+  /* data numerals (§3.2) */
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@layer utilities {
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+  /* fade mask for horizontal scroll rows (home.md §5) */
+  .mask-fade-x {
+    -webkit-mask-image: linear-gradient(to right, transparent, black 24px, black calc(100% - 24px), transparent);
+    mask-image: linear-gradient(to right, transparent, black 24px, black calc(100% - 24px), transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 150ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 150ms !important;
+  }
+}
