@@ -109,7 +109,7 @@ function KineticTitle({ text }: { text: string }) {
           transition={{ duration: 0.9, delay: 0.15 + i * 0.12, ease: [0.22, 1, 0.36, 1] }}
         >
           {word.w}
-          {i < words.length - 1 ? ' ' : ''}
+          {i < words.length - 1 ? ' ' : ''}
         </motion.span>
       ))}
     </h1>
