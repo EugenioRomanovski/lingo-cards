@@ -4,6 +4,7 @@
 import { useMemo } from 'react';
 import { Link, NavLink, Outlet, useLocation } from 'react-router';
 import { BarChart3, BookOpen, Download, Home, Moon, PlayCircle, Sun, Waypoints } from 'lucide-react';
+import Logo from '@/components/Logo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { useAppStore } from '@/store/useAppStore';
@@ -63,7 +64,7 @@ export default function Layout() {
       {/* Desktop sidebar (>=1024px) */}
       <aside className="sticky top-0 hidden h-[100dvh] w-60 shrink-0 flex-col border-r border-border bg-surface lg:flex">
         <Link to="/" className="flex items-center gap-2.5 px-5 pt-5 pb-6">
-          <img src={`${import.meta.env.BASE_URL}logo.svg`} alt="" className="h-7 w-7 text-ink" />
+          <Logo className="h-7 w-7 text-ink" />
           <span className="font-display text-[18px] font-semibold tracking-[-0.01em]">Lingo Cards</span>
         </Link>
         <nav className="flex flex-1 flex-col gap-1 px-3">
