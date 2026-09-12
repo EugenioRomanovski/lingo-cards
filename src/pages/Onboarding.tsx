@@ -285,7 +285,7 @@ export default function Onboarding() {
                   className="mt-4 max-w-[460px] text-base leading-[26px] font-medium text-ink-muted"
                 >
                   264 термина по грамматике, фонетике, лексикологии и стилистике. Карточки,
-                  интервальные повторения и карта связей в разделе Graph.
+                  интервальные повторения и карта связей в разделе Граф.
                 </motion.p>
                 <motion.img
                   src={`${import.meta.env.BASE_URL}onboarding-hero.svg`}
