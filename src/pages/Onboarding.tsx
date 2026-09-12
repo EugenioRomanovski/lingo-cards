@@ -19,6 +19,7 @@ import {
   Play,
   Zap,
 } from 'lucide-react';
+import Logo from '@/components/Logo';
 import { useAppStore } from '@/store/useAppStore';
 import type { TopicId } from '@/lib/data';
 import { cn } from '@/lib/utils';
@@ -267,14 +268,13 @@ export default function Onboarding() {
           >
             {step === 0 && (
               <div className="flex flex-col items-center text-center">
-                <motion.img
-                  src={`${import.meta.env.BASE_URL}logo.svg`}
-                  alt="Lingo Cards"
-                  className="h-[72px] w-[72px]"
+                <motion.div
                   initial={{ scale: 0.8, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ type: 'spring', stiffness: 260, damping: 20 }}
-                />
+                >
+                  <Logo className="h-[72px] w-[72px] text-ink" />
+                </motion.div>
                 <div className="mt-6">
                   <KineticTitle text="Твоя система терминов" />
                 </div>
@@ -285,7 +285,7 @@ export default function Onboarding() {
                   className="mt-4 max-w-[460px] text-base leading-[26px] font-medium text-ink-muted"
                 >
                   264 термина по грамматике, фонетике, лексикологии и стилистике. Карточки,
-                  интервальные повторения и карта связей — как в Obsidian.
+                  интервальные повторения и карта связей в разделе Graph.
                 </motion.p>
                 <motion.img
                   src={`${import.meta.env.BASE_URL}onboarding-hero.svg`}
