@@ -1096,7 +1096,7 @@ export default function Stats() {
         icon: Flame,
         unlocked: streaks.record >= 7,
         progress: { current: streaks.record, target: 7 },
-        condition: 'стрик 7 дней подряд',
+        condition: 'серия 7 дней подряд',
       },
       {
         id: 'sniper',
@@ -1135,7 +1135,7 @@ export default function Stats() {
         icon: Trophy,
         unlocked: streaks.record >= 30,
         progress: { current: streaks.record, target: 30 },
-        condition: 'стрик 30 дней подряд',
+        condition: 'серия 30 дней подряд',
       },
     ];
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -1329,7 +1329,7 @@ export default function Stats() {
               </span>
             </>
           ) : (
-            <span className="text-[12.5px] font-medium tracking-[0.02em] text-ink-muted">стрик ещё не начат</span>
+            <span className="text-[12.5px] font-medium tracking-[0.02em] text-ink-muted">серия ещё не начата</span>
           )}
         </div>
       </motion.section>
