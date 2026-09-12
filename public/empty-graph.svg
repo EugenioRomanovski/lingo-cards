@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" fill="none">
+  <!-- A lone node with dashed orbit rings — room for future connections -->
+  <g stroke="#2A2420" stroke-linecap="round">
+    <circle cx="400" cy="300" r="90" stroke-width="1.5" stroke-dasharray="2 10" opacity="0.5"/>
+    <circle cx="400" cy="300" r="150" stroke-width="1.5" stroke-dasharray="2 12" opacity="0.35"/>
+    <circle cx="400" cy="300" r="212" stroke-width="1.5" stroke-dasharray="2 14" opacity="0.22"/>
+  </g>
+  <!-- center node -->
+  <circle cx="400" cy="300" r="16" fill="#B0705A"/>
+  <circle cx="400" cy="300" r="16" stroke="#2A2420" stroke-width="1.5"/>
+  <!-- faint potential-connection dots on orbits -->
+  <g fill="#2A2420" opacity="0.4">
+    <circle cx="490" cy="300" r="5"/>
+    <circle cx="296" cy="212" r="5"/>
+    <circle cx="520" cy="196" r="5"/>
+    <circle cx="252" cy="392" r="5"/>
+    <circle cx="566" cy="410" r="5"/>
+    <circle cx="400" cy="512" r="5"/>
+  </g>
+</svg>
