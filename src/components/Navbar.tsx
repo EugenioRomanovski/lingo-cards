@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router';
 import { Moon, Settings2, Sun } from 'lucide-react';
+import Logo from '@/components/Logo';
 import { useAppStore } from '@/store/useAppStore';
 import { cn } from '@/lib/utils';
 
