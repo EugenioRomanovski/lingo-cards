@@ -1,0 +1,33 @@
+{
+ "version": "1.0",
+ "generated": "2026-09-12",
+ "topics": [
+  {
+   "id": "grammar",
+   "title": "Грамматика",
+   "color": "#b0705a"
+  },
+  {
+   "id": "phonetics",
+   "title": "Фонетика",
+   "color": "#7d8f69"
+  },
+  {
+   "id": "lexicology",
+   "title": "Лексикология",
+   "color": "#a08a5b"
+  },
+  {
+   "id": "stylistics",
+   "title": "Стилистика",
+   "color": "#8a7a9e"
+  }
+ ],
+ "files": [
+  "terms-01.json",
+  "terms-02.json",
+  "terms-03.json",
+  "terms-04.json",
+  "terms-05.json"
+ ]
+}
