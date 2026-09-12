@@ -3,6 +3,7 @@ import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
+import { Separator } from "@/components/ui/separator"
 
 function ItemGroup({ className, ...props }: React.ComponentProps<"div">) {
   return (
@@ -18,12 +19,12 @@ function ItemGroup({ className, ...props }: React.ComponentProps<"div">) {
 function ItemSeparator({
   className,
   ...props
-}: React.ComponentProps<"div">) {
+}: React.ComponentProps<typeof Separator>) {
   return (
-    <div
+    <Separator
       data-slot="item-separator"
-      role="separator"
-      className={cn("my-0 h-px w-full bg-border", className)}
+      orientation="horizontal"
+      className={cn("my-0", className)}
       {...props}
     />
   )
