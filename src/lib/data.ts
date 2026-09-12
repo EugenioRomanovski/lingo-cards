@@ -51,12 +51,12 @@ export function loadDataset(): Promise<Dataset> {
     cache = (async () => {
       const manifest = await fetchJson<Manifest>(`${base}manifest.json`);
       const chunks = await Promise.all(
-        manifest.files.map((f) => fetchJson<{ terms: Term[] }>(`${base}${f}`)),
+        manifest.files.map((f) => fetchJson<Term[]>(`${base}${f}`)),
       );
       const dataset: Dataset = {
         version: manifest.version,
         topics: manifest.topics,
-        terms: chunks.flatMap((c) => c.terms),
+        terms: chunks.flatMap((c) => c),
       };
       return dataset;
     })();
