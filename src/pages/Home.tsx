@@ -313,7 +313,7 @@ export default function Home() {
               </span>
             </>
           ) : (
-            <span className="text-[12.5px] font-medium tracking-[0.02em] text-ink-muted">начни стрик</span>
+            <span className="text-[12.5px] font-medium tracking-[0.02em] text-ink-muted">начни серию</span>
           )}
         </motion.div>
       </motion.section>
