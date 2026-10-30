@@ -3,6 +3,7 @@
 // Полноэкранный фокус-режим: один вопрос за раз, самооценка SM-2, сохранение в Dexie.
 
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { useNavigate, useSearchParams } from 'react-router';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import {
@@ -1188,64 +1189,71 @@ function AnswerPanel({
         >
           <motion.div variants={{ hidden: { opacity: 0, y: 8 }, show: { opacity: 1, y: 0 } }}>
             {showDefinition ? (
-              <div className="max-h-[45dvh] overflow-y-auto overscroll-contain pr-1">
-                <p className="font-display text-[17px] leading-[28px] font-normal">{term.definition}</p>
-              </div>
+              <p className="font-display text-[17px] leading-[28px] font-normal">{term.definition}</p>
             ) : (
               <>
                 <p className="font-display text-[22px] font-semibold">{term.term}</p>
                 {term.etymology && (
                   <p className="mt-1 font-display text-[15px] text-ink-muted italic">{term.etymology}</p>
                 )}
-                <div className="mt-2 max-h-[40dvh] overflow-y-auto overscroll-contain pr-1">
-                  <p className="text-[15px] leading-[24px] font-medium text-ink-muted">{term.definition}</p>
-                </div>
+                <p className="mt-2 text-[15px] leading-[24px] font-medium text-ink-muted">{term.definition}</p>
               </>
             )}
           </motion.div>
-
-          <motion.div variants={{ hidden: { opacity: 0, y: 8 }, show: { opacity: 1, y: 0 } }} className="mt-5">
-            <p className="mb-2 text-[11px] font-bold tracking-[0.09em] text-ink-faint uppercase">
-              Насколько хорошо помнишь?
-            </p>
-            <div className="flex gap-2.5">
-              <button
-                type="button"
-                onClick={() => onGrade('bad')}
-                className="flex h-[52px] flex-1 items-center justify-center gap-2 rounded-xl bg-surface-2 text-[15px] font-semibold transition-all duration-200 hover:bg-[color:color-mix(in_srgb,var(--error)_14%,transparent)] hover:text-error active:scale-[0.97]"
-              >
-                <X className="h-[18px] w-[18px]" />
-                Не помню
-              </button>
-              <button
-                type="button"
-                onClick={() => onGrade('good')}
-                disabled={!wasRight}
-                title={!wasRight ? '«Знаю» недоступно после ошибки' : undefined}
-                className="flex h-[52px] flex-1 items-center justify-center gap-2 rounded-full pressable bg-terra text-[15px] font-semibold text-white shadow-sm transition-all duration-200 hover:bg-terra-hover active:scale-[0.97] disabled:opacity-45"
-              >
-                <Check className="h-[18px] w-[18px]" />
-                Знаю
-              </button>
-            </div>
-            <div className="mt-2 flex justify-center">
-              <button
-                type="button"
-                onClick={() => onGrade('unsure')}
-                className="rounded-lg px-3 py-1.5 text-sm font-medium text-ink-muted transition-colors hover:bg-surface-2 hover:text-ink"
-              >
-                Неуверенно
-              </button>
-            </div>
-            <p className="mt-1 hidden text-center text-[11px] font-medium text-ink-faint lg:block">
-              <kbd className="rounded-md border border-border bg-surface-2 px-1.5 py-0.5 font-mono">←</kbd> не помню ·{' '}
-              <kbd className="rounded-md border border-border bg-surface-2 px-1.5 py-0.5 font-mono">→</kbd> знаю ·{' '}
-              <kbd className="rounded-md border border-border bg-surface-2 px-1.5 py-0.5 font-mono">↑</kbd> неуверенно
-            </p>
-          </motion.div>
         </motion.div>
       </div>
+      {/* room for the floating grade bar so the definition can scroll fully into view */}
+      <div aria-hidden="true" className="h-[calc(96px+env(safe-area-inset-bottom))]" />
+      <GradeBar wasRight={wasRight} onGrade={onGrade} />
     </motion.div>
+  );
+}
+
+/** Floating Liquid Glass bar with self-grade actions, pinned above the home indicator. */
+function GradeBar({ wasRight, onGrade }: { wasRight: boolean; onGrade: (g: Grade) => void }) {
+  return createPortal(
+    <motion.div
+      initial={{ y: 96, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ type: 'spring', stiffness: 420, damping: 34 }}
+      className="fixed inset-x-0 bottom-0 z-40 px-4 pb-[max(env(safe-area-inset-bottom),12px)]"
+      role="group"
+      aria-label="Насколько хорошо помнишь?"
+    >
+      <div className="glass-strong mx-auto flex max-w-[560px] items-center gap-1.5 rounded-full p-1.5">
+        <button
+          type="button"
+          onClick={() => onGrade('bad')}
+          className="pressable flex h-[52px] flex-1 items-center justify-center gap-1.5 rounded-full text-[15px] font-semibold text-error transition-colors hover:bg-[color:color-mix(in_srgb,var(--error)_12%,transparent)]"
+        >
+          <X className="h-[18px] w-[18px]" strokeWidth={2.5} />
+          Не помню
+        </button>
+        <button
+          type="button"
+          onClick={() => onGrade('unsure')}
+          className="pressable flex h-[52px] flex-1 items-center justify-center rounded-full text-[15px] font-semibold text-ink transition-colors hover:bg-ink/[0.06]"
+        >
+          Неуверенно
+        </button>
+        <button
+          type="button"
+          onClick={() => onGrade('good')}
+          disabled={!wasRight}
+          title={!wasRight ? '«Знаю» недоступно после ошибки' : undefined}
+          className="pressable flex h-[52px] flex-1 items-center justify-center gap-1.5 rounded-full bg-terra text-[15px] font-semibold text-white shadow-sm transition-colors hover:bg-terra-hover disabled:opacity-40 disabled:shadow-none"
+        >
+          <Check className="h-[18px] w-[18px]" strokeWidth={2.5} />
+          Знаю
+        </button>
+      </div>
+      <p className="mt-1.5 hidden text-center text-[11px] font-medium text-ink-faint lg:block">
+        <kbd className="rounded-md border border-border bg-surface-2 px-1.5 py-0.5 font-mono">←</kbd> не помню ·{' '}
+        <kbd className="rounded-md border border-border bg-surface-2 px-1.5 py-0.5 font-mono">↑</kbd> неуверенно ·{' '}
+        <kbd className="rounded-md border border-border bg-surface-2 px-1.5 py-0.5 font-mono">→</kbd> знаю
+      </p>
+    </motion.div>,
+    document.body,
   );
 }
 
