@@ -88,6 +88,12 @@ function parseHex(c: string): [number, number, number] {
 }
 
 function hexAlpha(hex: string, a: number): string {
+  // theme tokens may also be rgb()/rgba() — scale their own alpha
+  const m = /rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(?:,\s*([\d.]+))?\s*\)/.exec(hex);
+  if (m) {
+    const base = m[4] !== undefined ? parseFloat(m[4]) : 1;
+    return `rgba(${m[1]},${m[2]},${m[3]},${Math.min(1, Math.max(0, a * base))})`;
+  }
   const [r, g, b] = parseHex(hex);
   return `rgba(${r},${g},${b},${Math.min(1, Math.max(0, a))})`;
 }
@@ -197,12 +203,12 @@ function readColors(datasetTopics: Topic[]): GColors {
   const topics: Record<string, string> = {};
   for (const t of datasetTopics) topics[t.id] = g(`--topic-${t.id}`, t.color);
   return {
-    bg: g('--bg', '#F5F0E6'),
+    bg: g('--bg', '#F2F2F7'),
     text: g('--text', '#2A2420'),
     textMuted: g('--text-muted', '#756A5C'),
     textFaint: g('--text-faint', '#A79B8A'),
-    accent: g('--accent', '#B0705A'),
-    surface: g('--surface', '#FDFBF5'),
+    accent: g('--accent', '#5856D6'),
+    surface: g('--surface', '#FFFFFF'),
     surface2: g('--surface-2', '#EFE8D9'),
     border: g('--border', '#E2D9C6'),
     st: {
@@ -703,7 +709,7 @@ export default function GraphPage() {
     const labelByDensity = k < 0.5 ? fdeg >= 6 : k <= 1.2 ? fdeg >= 3 : true;
     if (labelAlways || labelByDensity) {
       const fs = clamp(10.5 / Math.sqrt(k), 7, 13);
-      ctx.font = `500 ${fs}px Manrope, sans-serif`;
+      ctx.font = `500 ${fs}px -apple-system, BlinkMacSystemFont, Inter, sans-serif`;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'top';
       const ly = r + 3;
@@ -987,7 +993,7 @@ export default function GraphPage() {
             <button
               type="button"
               onClick={() => useAppStore.getState().loadData()}
-              className="rounded-xl bg-terra px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-terra-hover"
+              className="rounded-full pressable bg-terra px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-terra-hover"
             >
               Попробовать снова
             </button>
@@ -1002,7 +1008,7 @@ export default function GraphPage() {
             <button
               type="button"
               onClick={() => setFilters(defaultFilters())}
-              className="rounded-xl px-4 py-2 text-sm font-semibold text-terra transition-colors hover:bg-terra-soft"
+              className="rounded-full pressable px-4 py-2 text-sm font-semibold text-terra transition-colors hover:bg-terra-soft"
             >
               Сбросить фильтры
             </button>
@@ -1204,7 +1210,7 @@ export default function GraphPage() {
                     step={1}
                     value={filters.minDeg}
                     onChange={(e) => setFilters((f) => ({ ...f, minDeg: Number(e.target.value) }))}
-                    className="w-full accent-[#B0705A]"
+                    className="w-full accent-[var(--accent)]"
                     aria-label="Минимум связей"
                   />
                 </div>
@@ -1464,7 +1470,7 @@ export default function GraphPage() {
               <div className="flex flex-col gap-2 border-t border-border p-4 pt-3">
                 <Link
                   to={`/train/session?pool=force&count=all&topics=${selectedNode.term.topic}`}
-                  className="flex h-11 items-center justify-center gap-2 rounded-xl bg-terra text-sm font-semibold text-white transition-all duration-200 hover:bg-terra-hover active:scale-[0.97]"
+                  className="flex h-11 items-center justify-center gap-2 rounded-full pressable bg-terra text-sm font-semibold text-white transition-all duration-200 hover:bg-terra-hover active:scale-[0.97]"
                 >
                   <Zap className="h-[18px] w-[18px]" />
                   Тренировать кластер ({clusterIds.length})
@@ -1472,7 +1478,7 @@ export default function GraphPage() {
                 <div className="flex gap-2">
                   <Link
                     to={`/library/${selectedNode.id}`}
-                    className="flex h-11 flex-1 items-center justify-center gap-2 rounded-xl border border-border bg-surface-2 text-sm font-semibold transition-colors hover:bg-surface-3"
+                    className="flex h-11 flex-1 items-center justify-center gap-2 rounded-full pressable border border-border bg-surface-2 text-sm font-semibold transition-colors hover:bg-surface-3"
                   >
                     <BookOpen className="h-4 w-4" />
                     Открыть карточку
@@ -1480,7 +1486,7 @@ export default function GraphPage() {
                   <button
                     type="button"
                     onClick={clearSelection}
-                    className="flex h-11 flex-1 items-center justify-center rounded-xl text-sm font-semibold text-terra transition-colors hover:bg-terra-soft"
+                    className="flex h-11 flex-1 items-center justify-center rounded-full pressable text-sm font-semibold text-terra transition-colors hover:bg-terra-soft"
                   >
                     Сбросить выбор
                   </button>

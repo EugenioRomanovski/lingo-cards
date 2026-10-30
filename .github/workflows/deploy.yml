@@ -26,6 +26,8 @@ jobs:
       # API-based push we use); install from package.json ranges instead.
       - run: npm install --no-audit --no-fund
       - run: npm run build
+        env:
+          VITE_BASE: /lingo-cards/
       - run: cp dist/index.html dist/404.html   # SPA fallback
       - uses: actions/upload-pages-artifact@v3
         with:

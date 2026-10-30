@@ -181,7 +181,7 @@ export default function TermPage() {
         </p>
         <Link
           to="/library"
-          className="mt-5 inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold text-terra transition-colors hover:bg-terra-soft"
+          className="mt-5 inline-flex items-center gap-2 rounded-full pressable px-4 py-2.5 text-sm font-semibold text-terra transition-colors hover:bg-terra-soft"
         >
           <ArrowLeft className="h-4 w-4" strokeWidth={1.75} />
           К библиотеке
@@ -444,14 +444,14 @@ export default function TermPage() {
           <div className="flex w-full gap-3 rounded-2xl border border-border bg-surface/95 p-3 shadow-lg backdrop-blur-[10px]">
             <Link
               to={`/graph?focus=${term.id}`}
-              className="flex h-11 flex-1 items-center justify-center gap-2 rounded-xl border border-border bg-surface-2 px-4 text-sm font-semibold text-ink transition-colors hover:bg-surface-3"
+              className="flex h-11 flex-1 items-center justify-center gap-2 rounded-full pressable border border-border bg-surface-2 px-4 text-sm font-semibold text-ink transition-colors hover:bg-surface-3"
             >
               <Waypoints className="h-[18px] w-[18px]" strokeWidth={1.75} />
               Показать на графе
             </Link>
             <Link
               to={sessionHref({ pool: 'force', count: 'all', topics: term.topic })}
-              className="flex h-11 flex-1 items-center justify-center gap-2 rounded-xl bg-terra px-4 text-sm font-semibold text-white transition-colors hover:bg-terra-hover"
+              className="flex h-11 flex-1 items-center justify-center gap-2 rounded-full pressable bg-terra px-4 text-sm font-semibold text-white transition-colors hover:bg-terra-hover"
             >
               <Repeat className="h-[18px] w-[18px]" strokeWidth={1.75} />
               Повторить сейчас

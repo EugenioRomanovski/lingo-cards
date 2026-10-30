@@ -304,7 +304,7 @@ export default function Onboarding() {
                   <button
                     type="button"
                     onClick={goNext}
-                    className="h-12 rounded-xl bg-terra px-10 text-base font-semibold text-white shadow-md transition-all duration-200 hover:bg-terra-hover active:scale-[0.97] lg:h-11"
+                    className="h-12 rounded-full pressable bg-terra px-10 text-base font-semibold text-white shadow-md transition-all duration-200 hover:bg-terra-hover active:scale-[0.97] lg:h-11"
                   >
                     Поехали
                   </button>
@@ -413,14 +413,14 @@ export default function Onboarding() {
                   <button
                     type="button"
                     onClick={goPrev}
-                    className="flex h-12 items-center gap-1.5 rounded-xl px-4 text-sm font-semibold text-ink-muted transition-colors hover:bg-surface-2 lg:h-11"
+                    className="flex h-12 items-center gap-1.5 rounded-full pressable px-4 text-sm font-semibold text-ink-muted transition-colors hover:bg-surface-2 lg:h-11"
                   >
                     <ArrowLeft className="h-4 w-4" /> Назад
                   </button>
                   <button
                     type="button"
                     onClick={goNext}
-                    className="h-12 flex-1 rounded-xl bg-terra text-base font-semibold text-white shadow-md transition-all duration-200 hover:bg-terra-hover active:scale-[0.97] lg:h-11"
+                    className="h-12 flex-1 rounded-full pressable bg-terra text-base font-semibold text-white shadow-md transition-all duration-200 hover:bg-terra-hover active:scale-[0.97] lg:h-11"
                   >
                     Дальше
                   </button>
@@ -495,14 +495,14 @@ export default function Onboarding() {
                   <button
                     type="button"
                     onClick={() => finish('/train/setup')}
-                    className="flex h-12 items-center justify-center gap-2 rounded-xl bg-terra text-base font-semibold text-white shadow-md transition-all duration-200 hover:bg-terra-hover active:scale-[0.97]"
+                    className="flex h-12 items-center justify-center gap-2 rounded-full pressable bg-terra text-base font-semibold text-white shadow-md transition-all duration-200 hover:bg-terra-hover active:scale-[0.97]"
                   >
                     <Play className="h-[18px] w-[18px]" /> Начать первую тренировку
                   </button>
                   <button
                     type="button"
                     onClick={() => finish('/')}
-                    className="h-11 rounded-xl text-sm font-semibold text-ink-muted transition-colors hover:bg-surface-2"
+                    className="h-11 rounded-full pressable text-sm font-semibold text-ink-muted transition-colors hover:bg-surface-2"
                   >
                     Сначала осмотрюсь
                   </button>

@@ -253,7 +253,7 @@ export default function Home() {
         <button
           type="button"
           onClick={() => void loadData()}
-          className="mt-6 h-11 rounded-xl bg-terra px-6 text-sm font-semibold text-white transition-colors hover:bg-terra-hover"
+          className="mt-6 h-11 rounded-full pressable bg-terra px-6 text-sm font-semibold text-white transition-colors hover:bg-terra-hover"
         >
           Попробовать снова
         </button>
@@ -351,7 +351,7 @@ export default function Home() {
                 type="button"
                 disabled={loading}
                 onClick={() => navigate(sessionHref({ pool: 'all', count: '20', mixReview: '1' }))}
-                className="flex h-[52px] items-center gap-2 rounded-xl bg-terra px-7 text-[15px] font-semibold text-white shadow-sm transition-all duration-200 hover:bg-terra-hover active:scale-[0.97] disabled:opacity-45"
+                className="flex h-[52px] items-center gap-2 rounded-full pressable bg-terra px-7 text-[15px] font-semibold text-white shadow-sm transition-all duration-200 hover:bg-terra-hover active:scale-[0.97] disabled:opacity-45"
               >
                 <Play className="h-[18px] w-[18px]" />
                 Начать сессию
@@ -511,7 +511,7 @@ export default function Home() {
                 <button
                   type="button"
                   onClick={() => navigate(sessionHref({ pool: 'all', count: '20', mixReview: '1' }))}
-                  className="mt-4 rounded-xl px-4 py-2.5 text-sm font-semibold text-terra transition-colors hover:bg-accent-soft"
+                  className="mt-4 rounded-full pressable px-4 py-2.5 text-sm font-semibold text-terra transition-colors hover:bg-accent-soft"
                 >
                   Начать первую сессию
                 </button>

@@ -1,4 +1,4 @@
-// Global TopBar (home.md §1): 56px, sticky, blur on scroll, logo + theme toggle + settings.
+// Global TopBar: transparent at rest, glass material on scroll; glass capsule for actions (iOS 27).
 
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router';
@@ -22,24 +22,26 @@ export default function Navbar() {
   return (
     <header
       className={cn(
-        'sticky top-0 z-50 h-14 bg-bg/80 backdrop-blur-[12px] transition-[border-color,box-shadow] duration-200',
-        scrolled ? 'border-b border-border shadow-sm' : 'border-b border-transparent',
+        'sticky top-0 z-50 pt-[env(safe-area-inset-top)] transition-[background-color,box-shadow,backdrop-filter] duration-300',
+        scrolled
+          ? 'bg-bg/70 shadow-[inset_0_-0.5px_0_var(--border)] backdrop-blur-[24px] backdrop-saturate-[180%]'
+          : 'bg-transparent',
       )}
     >
-      <div className="mx-auto flex h-full max-w-[1440px] items-center justify-between px-4 lg:px-6">
+      <div className="mx-auto flex h-14 max-w-[1440px] items-center justify-between px-4 lg:px-6">
         <Link to="/" className="flex items-center gap-2.5" aria-label="Lingo Cards — на главную">
-          <Logo className="h-7 w-7 text-ink" />
-          <span className="hidden font-display text-[18px] font-semibold tracking-[-0.01em] sm:inline">
+          <Logo className="h-8 w-8 lg:hidden" />
+          <span className="font-display text-[17px] font-bold tracking-[-0.02em] lg:hidden">
             Lingo Cards
           </span>
         </Link>
 
-        <div className="flex items-center gap-1">
+        <div className="glass flex items-center gap-0.5 rounded-full p-0.5">
           <button
             type="button"
             onClick={toggleTheme}
             aria-label={theme === 'dark' ? 'Светлая тема' : 'Тёмная тема'}
-            className="flex h-11 w-11 items-center justify-center rounded-xl text-ink-muted transition-colors duration-200 hover:bg-surface-2 hover:text-ink"
+            className="pressable flex h-10 w-10 items-center justify-center rounded-full text-ink transition-colors duration-200 hover:bg-ink/[0.06]"
           >
             <span className="relative block h-5 w-5">
               <Sun
@@ -59,7 +61,7 @@ export default function Navbar() {
           <Link
             to="/stats#settings"
             aria-label="Настройки"
-            className="flex h-11 w-11 items-center justify-center rounded-xl text-ink-muted transition-colors duration-200 hover:bg-surface-2 hover:text-ink"
+            className="pressable flex h-10 w-10 items-center justify-center rounded-full text-ink transition-colors duration-200 hover:bg-ink/[0.06]"
           >
             <Settings2 className="h-5 w-5" />
           </Link>

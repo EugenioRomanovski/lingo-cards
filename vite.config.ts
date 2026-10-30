@@ -5,7 +5,8 @@ import { inspectAttr } from 'plugin-inspect-react-code'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/lingo-cards/',
+  // '/' for linglo.brainsome.app (Vercel); GitHub Pages build sets VITE_BASE=/lingo-cards/
+  base: process.env.VITE_BASE ?? '/',
   plugins: [inspectAttr(), react()],
   server: {
     port: 3000,

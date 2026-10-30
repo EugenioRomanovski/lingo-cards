@@ -402,7 +402,7 @@ export default function TrainSetup() {
         <button
           type="button"
           onClick={() => setConfig(DEFAULT_CONFIG)}
-          className="flex h-11 items-center gap-1.5 rounded-xl px-3 text-[13px] font-semibold text-ink-muted transition-colors hover:bg-surface-2 hover:text-ink"
+          className="flex h-11 items-center gap-1.5 rounded-full pressable px-3 text-[13px] font-semibold text-ink-muted transition-colors hover:bg-surface-2 hover:text-ink"
         >
           <RotateCcw className="h-4 w-4" strokeWidth={1.75} />
           Сбросить
@@ -823,7 +823,7 @@ export default function TrainSetup() {
             disabled={!valid || loading}
             onClick={start}
             whileTap={{ scale: 0.98 }}
-            className="flex h-[52px] w-full items-center justify-center gap-2 rounded-xl bg-terra text-[15px] font-semibold text-white shadow-sm transition-colors duration-200 hover:bg-terra-hover disabled:opacity-45"
+            className="flex h-[52px] w-full items-center justify-center gap-2 rounded-full pressable bg-terra text-[15px] font-semibold text-white shadow-sm transition-colors duration-200 hover:bg-terra-hover disabled:opacity-45"
           >
             <Play className="h-[18px] w-[18px]" />
             Начать → {loading ? '…' : effectiveCount}{' '}

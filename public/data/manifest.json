@@ -5,22 +5,22 @@
   {
    "id": "grammar",
    "title": "Грамматика",
-   "color": "#b0705a"
+   "color": "#ff6a3d"
   },
   {
    "id": "phonetics",
    "title": "Фонетика",
-   "color": "#7d8f69"
+   "color": "#30b0c7"
   },
   {
    "id": "lexicology",
    "title": "Лексикология",
-   "color": "#a08a5b"
+   "color": "#af52de"
   },
   {
    "id": "stylistics",
    "title": "Стилистика",
-   "color": "#8a7a9e"
+   "color": "#ff2d55"
   }
  ],
  "files": [

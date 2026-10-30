@@ -3,89 +3,104 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    /* design.md §2.1 — light theme (default) */
-    --bg: #F5F0E6;
-    --surface: #FDFBF5;
-    --surface-2: #EFE8D9;
-    --surface-3: #E7DFCD;
-    --border: #E2D9C6;
-    --border-strong: #CFC3AC;
-    --text: #2A2420;
-    --text-muted: #756A5C;
-    --text-faint: #A79B8A;
-    --accent: #B0705A;
-    --accent-hover: #9A5D49;
-    --accent-soft: rgba(176, 112, 90, 0.12);
-    --accent-ink: #7E4634;
+    :root {
+    /* iOS 27 — light (systemGroupedBackground family) */
+    --bg: #F2F2F7;
+    --surface: #FFFFFF;
+    --surface-2: #EDEDF2;
+    --surface-3: #E3E3EA;
+    --border: rgba(60, 60, 67, 0.12);
+    --border-strong: rgba(60, 60, 67, 0.24);
+    --text: #0B0B0F;
+    --text-muted: rgba(60, 60, 67, 0.72);
+    --text-faint: rgba(60, 60, 67, 0.42);
+    --accent: #5856D6;
+    --accent-hover: #4A47C4;
+    --accent-soft: rgba(88, 86, 214, 0.12);
+    --accent-ink: #3F3CB8;
 
-    /* statuses (§2.4) */
-    --st-learned: #5E8A58;
-    --st-learning: #C79A3D;
-    --st-weak: #C05B4D;
-    --st-due: #4E7FA6;
-    --st-new: #A79B8A;
-    --st-due-soft: rgba(78, 127, 166, 0.35);
+    /* statuses — iOS system colors */
+    --st-learned: #34C759;
+    --st-learning: #FF9500;
+    --st-weak: #FF3B30;
+    --st-due: #007AFF;
+    --st-new: #AEAEB2;
+    --st-due-soft: rgba(0, 122, 255, 0.35);
 
-    /* semantic (§2.5) */
-    --success: #5E8A58;
-    --error: #C05B4D;
-    --warning: #C79A3D;
-    --info: #4E7FA6;
+    --success: #34C759;
+    --error: #FF3B30;
+    --warning: #FF9500;
+    --info: #007AFF;
 
-    /* topic colors (§2.3) */
-    --topic-grammar: #B0705A;
-    --topic-phonetics: #7D8F69;
-    --topic-lexicology: #A08A5B;
-    --topic-stylistics: #8A7A9E;
-    --topic-alpha: 0.14;
+    /* topic colors */
+    --topic-grammar: #FF6A3D;
+    --topic-phonetics: #30B0C7;
+    --topic-lexicology: #AF52DE;
+    --topic-stylistics: #FF2D55;
+    --topic-alpha: 0.12;
 
-    --shadow-sm: 0 1px 2px rgba(58, 44, 30, 0.06);
-    --shadow-md: 0 2px 6px rgba(58, 44, 30, 0.06), 0 10px 28px rgba(58, 44, 30, 0.08);
-    --shadow-lg: 0 4px 12px rgba(58, 44, 30, 0.08), 0 24px 56px rgba(58, 44, 30, 0.12);
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04), 0 1px 1px rgba(0, 0, 0, 0.02);
+    --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.04), 0 12px 32px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.08), 0 32px 64px rgba(0, 0, 0, 0.12);
 
-    --radius: 0.75rem;
-    --texture-opacity: 0.035;
+    /* Liquid Glass material */
+    --glass-bg: rgba(255, 255, 255, 0.62);
+    --glass-bg-strong: rgba(255, 255, 255, 0.78);
+    --glass-edge: rgba(255, 255, 255, 0.85);
+    --glass-stroke: rgba(0, 0, 0, 0.06);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.10), 0 1px 2px rgba(0, 0, 0, 0.06);
+    --ambient-1: rgba(88, 86, 214, 0.10);
+    --ambient-2: rgba(255, 45, 85, 0.06);
+    --ambient-3: rgba(48, 176, 199, 0.08);
+
+    --radius: 1.125rem;
   }
 
   [data-theme="dark"] {
-    --bg: #1B1814;
-    --surface: #25211B;
-    --surface-2: #2E2820;
-    --surface-3: #383126;
-    --border: #3A3429;
-    --border-strong: #54493A;
-    --text: #EDE6D8;
-    --text-muted: #A89C8B;
-    --text-faint: #6E6455;
-    --accent: #CD8B71;
-    --accent-hover: #DE9E84;
-    --accent-soft: rgba(205, 139, 113, 0.16);
-    --accent-ink: #E0A78D;
+    --bg: #000000;
+    --surface: #1C1C1E;
+    --surface-2: #2C2C2E;
+    --surface-3: #3A3A3C;
+    --border: rgba(84, 84, 88, 0.45);
+    --border-strong: rgba(120, 120, 128, 0.6);
+    --text: #F5F5F7;
+    --text-muted: rgba(235, 235, 245, 0.66);
+    --text-faint: rgba(235, 235, 245, 0.34);
+    --accent: #7D7AFF;
+    --accent-hover: #918EFF;
+    --accent-soft: rgba(125, 122, 255, 0.18);
+    --accent-ink: #A9A7FF;
 
-    --st-learned: #86AC7F;
-    --st-learning: #D9B465;
-    --st-weak: #D97F6F;
-    --st-due: #7AA3C4;
-    --st-new: #6E6455;
-    --st-due-soft: rgba(122, 163, 196, 0.35);
+    --st-learned: #30D158;
+    --st-learning: #FF9F0A;
+    --st-weak: #FF453A;
+    --st-due: #0A84FF;
+    --st-new: #636366;
+    --st-due-soft: rgba(10, 132, 255, 0.4);
 
-    --success: #86AC7F;
-    --error: #D97F6F;
-    --warning: #D9B465;
-    --info: #7AA3C4;
+    --success: #30D158;
+    --error: #FF453A;
+    --warning: #FF9F0A;
+    --info: #0A84FF;
 
-    --topic-grammar: #CE8F79;
-    --topic-phonetics: #9DAF86;
-    --topic-lexicology: #C2A97B;
-    --topic-stylistics: #AB9DBE;
+    --topic-grammar: #FF7F55;
+    --topic-phonetics: #40C8E0;
+    --topic-lexicology: #BF5AF2;
+    --topic-stylistics: #FF375F;
     --topic-alpha: 0.2;
 
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
-    --shadow-md: 0 2px 6px rgba(0, 0, 0, 0.35), 0 10px 28px rgba(0, 0, 0, 0.4);
-    --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.4), 0 24px 56px rgba(0, 0, 0, 0.5);
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.4), 0 12px 32px rgba(0, 0, 0, 0.45);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5), 0 32px 64px rgba(0, 0, 0, 0.55);
 
-    --texture-opacity: 0.05;
+    --glass-bg: rgba(44, 44, 46, 0.55);
+    --glass-bg-strong: rgba(44, 44, 46, 0.72);
+    --glass-edge: rgba(255, 255, 255, 0.16);
+    --glass-stroke: rgba(255, 255, 255, 0.08);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.4);
+    --ambient-1: rgba(125, 122, 255, 0.16);
+    --ambient-2: rgba(255, 55, 95, 0.08);
+    --ambient-3: rgba(64, 200, 224, 0.08);
   }
 
   * {
@@ -99,20 +114,25 @@
   body {
     background-color: var(--bg);
     color: var(--text);
-    font-family: Manrope, system-ui, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", Inter, system-ui, sans-serif;
+    font-feature-settings: "cv11", "ss01";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: -0.006em;
     transition: background-color 200ms ease, color 200ms ease;
   }
 
-  /* paper texture (§7): feTurbulence tile over the page background */
+  /* ambient light behind the glass layers */
   body::before {
     content: "";
     position: fixed;
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    background-image: url("/texture-paper.svg");
-    background-size: 180px 180px;
-    opacity: var(--texture-opacity);
+    background:
+      radial-gradient(60vmax 50vmax at 0% 0%, var(--ambient-1), transparent 60%),
+      radial-gradient(50vmax 40vmax at 100% 10%, var(--ambient-2), transparent 60%),
+      radial-gradient(60vmax 50vmax at 80% 100%, var(--ambient-3), transparent 60%);
   }
 
   #root {
@@ -126,7 +146,23 @@
   }
 
   .font-display {
-    font-family: Spectral, Georgia, serif;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", Inter, system-ui, sans-serif;
+    letter-spacing: -0.015em;
+  }
+
+  /* iOS large titles */
+  h1.font-display {
+    font-weight: 700;
+    letter-spacing: -0.025em;
+  }
+
+  .font-mono {
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0;
+  }
+
+  ::selection {
+    background: var(--accent-soft);
   }
 
   /* data numerals (§3.2) */
@@ -136,6 +172,31 @@
 }
 
 @layer utilities {
+  /* Liquid Glass material (iOS 26+) */
+  .glass {
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    backdrop-filter: blur(24px) saturate(180%);
+    box-shadow:
+      inset 0 0.5px 0 0 var(--glass-edge),
+      inset 0 0 0 0.5px var(--glass-stroke),
+      var(--glass-shadow);
+  }
+  .glass-strong {
+    background: var(--glass-bg-strong);
+    -webkit-backdrop-filter: blur(32px) saturate(200%);
+    backdrop-filter: blur(32px) saturate(200%);
+    box-shadow:
+      inset 0 0.5px 0 0 var(--glass-edge),
+      inset 0 0 0 0.5px var(--glass-stroke),
+      var(--glass-shadow);
+  }
+  .pressable {
+    transition: transform 180ms cubic-bezier(0.3, 1.4, 0.5, 1), opacity 150ms ease;
+  }
+  .pressable:active {
+    transform: scale(0.96);
+  }
   .scrollbar-none {
     scrollbar-width: none;
   }

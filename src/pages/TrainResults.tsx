@@ -194,7 +194,7 @@ export default function TrainResults() {
         </p>
         <Link
           to="/train/setup"
-          className="mt-6 flex h-12 items-center gap-2 rounded-xl bg-terra px-6 text-[15px] font-semibold text-white transition-colors hover:bg-terra-hover"
+          className="mt-6 flex h-12 items-center gap-2 rounded-full pressable bg-terra px-6 text-[15px] font-semibold text-white transition-colors hover:bg-terra-hover"
         >
           <Play className="h-[18px] w-[18px]" />
           Начать сессию
@@ -455,7 +455,7 @@ function ResultsBody({
                 initial={{ scale: 1 }}
                 animate={{ scale: [1, 1.03, 1] }}
                 transition={{ delay: 0.9, duration: 0.6 }}
-                className="flex h-[52px] flex-[2] items-center justify-center gap-2 rounded-xl bg-terra text-[15px] font-semibold text-white shadow-sm transition-colors hover:bg-terra-hover"
+                className="flex h-[52px] flex-[2] items-center justify-center gap-2 rounded-full pressable bg-terra text-[15px] font-semibold text-white shadow-sm transition-colors hover:bg-terra-hover"
               >
                 <Repeat className="h-[18px] w-[18px]" />
                 Повторить ошибки ({errors.length})
@@ -464,7 +464,7 @@ function ResultsBody({
               <button
                 type="button"
                 onClick={() => navigate('/train/setup')}
-                className="flex h-[52px] flex-[2] items-center justify-center gap-2 rounded-xl bg-terra text-[15px] font-semibold text-white shadow-sm transition-colors hover:bg-terra-hover"
+                className="flex h-[52px] flex-[2] items-center justify-center gap-2 rounded-full pressable bg-terra text-[15px] font-semibold text-white shadow-sm transition-colors hover:bg-terra-hover"
               >
                 <Play className="h-[18px] w-[18px]" />
                 Новая сессия

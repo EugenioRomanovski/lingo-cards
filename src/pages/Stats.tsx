@@ -1287,7 +1287,7 @@ export default function Stats() {
         <button
           type="button"
           onClick={() => void loadData()}
-          className="mt-6 h-11 rounded-xl bg-terra px-6 text-sm font-semibold text-white transition-colors hover:bg-terra-hover"
+          className="mt-6 h-11 rounded-full pressable bg-terra px-6 text-sm font-semibold text-white transition-colors hover:bg-terra-hover"
         >
           Попробовать снова
         </button>
@@ -1480,7 +1480,7 @@ export default function Stats() {
             </p>
             <Link
               to="/train/setup"
-              className="mt-6 flex h-12 items-center gap-2 rounded-xl bg-terra px-6 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-terra-hover active:scale-[0.97]"
+              className="mt-6 flex h-12 items-center gap-2 rounded-full pressable bg-terra px-6 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-terra-hover active:scale-[0.97]"
             >
               <Play className="h-[18px] w-[18px]" /> Начать первую тренировку
             </Link>
@@ -1505,7 +1505,7 @@ export default function Stats() {
                 <button
                   type="button"
                   onClick={() => setVisibleCount((n) => n + 8)}
-                  className="h-11 rounded-xl border border-border bg-surface-2 px-6 text-sm font-semibold transition-colors hover:bg-surface-3"
+                  className="h-11 rounded-full pressable border border-border bg-surface-2 px-6 text-sm font-semibold transition-colors hover:bg-surface-3"
                 >
                   Показать ещё 8
                 </button>
@@ -1716,14 +1716,14 @@ export default function Stats() {
               <button
                 type="button"
                 onClick={() => setImportPayload(null)}
-                className="h-11 rounded-xl px-4 text-sm font-semibold text-ink-muted transition-colors hover:bg-surface-2"
+                className="h-11 rounded-full pressable px-4 text-sm font-semibold text-ink-muted transition-colors hover:bg-surface-2"
               >
                 Отмена
               </button>
               <button
                 type="button"
                 onClick={() => void confirmImport()}
-                className="h-11 rounded-xl bg-terra px-5 text-sm font-semibold text-white transition-all hover:bg-terra-hover active:scale-[0.97]"
+                className="h-11 rounded-full pressable bg-terra px-5 text-sm font-semibold text-white transition-all hover:bg-terra-hover active:scale-[0.97]"
               >
                 Импортировать
               </button>
@@ -1742,14 +1742,14 @@ export default function Stats() {
           <button
             type="button"
             onClick={() => setResetStep(0)}
-            className="h-11 rounded-xl px-4 text-sm font-semibold text-ink-muted transition-colors hover:bg-surface-2"
+            className="h-11 rounded-full pressable px-4 text-sm font-semibold text-ink-muted transition-colors hover:bg-surface-2"
           >
             Отмена
           </button>
           <button
             type="button"
             onClick={() => setResetStep(2)}
-            className="h-11 rounded-xl bg-error px-5 text-sm font-semibold text-white transition-all hover:opacity-90 active:scale-[0.97]"
+            className="h-11 rounded-full pressable bg-error px-5 text-sm font-semibold text-white transition-all hover:opacity-90 active:scale-[0.97]"
           >
             Продолжить
           </button>
@@ -1775,7 +1775,7 @@ export default function Stats() {
               setResetStep(0);
               setResetText('');
             }}
-            className="h-11 rounded-xl px-4 text-sm font-semibold text-ink-muted transition-colors hover:bg-surface-2"
+            className="h-11 rounded-full pressable px-4 text-sm font-semibold text-ink-muted transition-colors hover:bg-surface-2"
           >
             Отмена
           </button>
@@ -1783,7 +1783,7 @@ export default function Stats() {
             type="button"
             disabled={resetText !== 'СБРОС'}
             onClick={() => void confirmReset()}
-            className="h-11 rounded-xl bg-error px-5 text-sm font-semibold text-white transition-all hover:opacity-90 active:scale-[0.97] disabled:opacity-45 disabled:hover:opacity-45"
+            className="h-11 rounded-full pressable bg-error px-5 text-sm font-semibold text-white transition-all hover:opacity-90 active:scale-[0.97] disabled:opacity-45 disabled:hover:opacity-45"
           >
             Удалить навсегда
           </button>

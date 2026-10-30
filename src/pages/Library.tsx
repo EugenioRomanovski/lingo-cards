@@ -587,7 +587,7 @@ export default function Library() {
           <button
             type="button"
             onClick={resetFilters}
-            className="mt-5 rounded-xl px-4 py-2.5 text-sm font-semibold text-terra transition-colors hover:bg-terra-soft"
+            className="mt-5 rounded-full pressable px-4 py-2.5 text-sm font-semibold text-terra transition-colors hover:bg-terra-soft"
           >
             Сбросить фильтры
           </button>

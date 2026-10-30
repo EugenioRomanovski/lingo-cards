@@ -104,7 +104,7 @@ const GRADE_LABEL: Record<Grade, string> = { good: 'знаю', unsure: 'неув
 function percentColor(p: number): string {
   if (p >= 90) return 'var(--success)';
   if (p >= 70) return 'var(--warning)';
-  if (p >= 50) return '#C4763B';
+  if (p >= 50) return '#FF6A3D';
   return 'var(--error)';
 }
 
@@ -320,7 +320,7 @@ export default function TrainSession() {
         <button
           type="button"
           onClick={() => void loadData()}
-          className="mt-6 h-11 rounded-xl bg-terra px-6 text-sm font-semibold text-white transition-colors hover:bg-terra-hover"
+          className="mt-6 h-11 rounded-full pressable bg-terra px-6 text-sm font-semibold text-white transition-colors hover:bg-terra-hover"
         >
           Попробовать снова
         </button>
@@ -348,7 +348,7 @@ export default function TrainSession() {
         <button
           type="button"
           onClick={() => navigate('/train/setup')}
-          className="mt-6 h-12 rounded-xl bg-terra px-6 text-[15px] font-semibold text-white transition-colors hover:bg-terra-hover"
+          className="mt-6 h-12 rounded-full pressable bg-terra px-6 text-[15px] font-semibold text-white transition-colors hover:bg-terra-hover"
         >
           К настройке сессии
         </button>
@@ -430,14 +430,14 @@ export default function TrainSession() {
               <button
                 type="button"
                 onClick={() => void abort()}
-                className="flex h-12 items-center justify-center rounded-xl bg-error text-[15px] font-semibold text-white transition-opacity hover:opacity-90"
+                className="flex h-12 items-center justify-center rounded-full pressable bg-error text-[15px] font-semibold text-white transition-opacity hover:opacity-90"
               >
                 Выйти
               </button>
               <button
                 type="button"
                 onClick={() => setConfirmExit(false)}
-                className="flex h-12 items-center justify-center rounded-xl bg-terra text-[15px] font-semibold text-white transition-colors hover:bg-terra-hover"
+                className="flex h-12 items-center justify-center rounded-full pressable bg-terra text-[15px] font-semibold text-white transition-colors hover:bg-terra-hover"
               >
                 Продолжить
               </button>
@@ -931,14 +931,14 @@ function QuestionView({
                   <button
                     type="button"
                     onClick={reveal}
-                    className="h-12 rounded-xl px-5 text-[15px] font-semibold text-ink-muted transition-colors hover:bg-surface-2"
+                    className="h-12 rounded-full pressable px-5 text-[15px] font-semibold text-ink-muted transition-colors hover:bg-surface-2"
                   >
                     Не помню
                   </button>
                   <button
                     type="submit"
                     disabled={!value.trim()}
-                    className="h-12 flex-1 rounded-xl bg-terra text-[15px] font-semibold text-white shadow-sm transition-colors hover:bg-terra-hover disabled:opacity-45"
+                    className="h-12 flex-1 rounded-full pressable bg-terra text-[15px] font-semibold text-white shadow-sm transition-colors hover:bg-terra-hover disabled:opacity-45"
                   >
                     Проверить
                   </button>
@@ -991,7 +991,7 @@ function QuestionView({
                   <button
                     type="button"
                     onClick={reveal}
-                    className="h-12 rounded-xl px-5 text-[15px] font-semibold text-ink-muted transition-colors hover:bg-surface-2"
+                    className="h-12 rounded-full pressable px-5 text-[15px] font-semibold text-ink-muted transition-colors hover:bg-surface-2"
                   >
                     Не помню
                   </button>
@@ -1000,7 +1000,7 @@ function QuestionView({
                     onClick={submitPrecision}
                     disabled={wordCount < 4}
                     title={wordCount < 4 ? 'Нужно минимум 4 слова' : undefined}
-                    className="flex h-12 flex-1 items-center justify-center gap-2 rounded-xl bg-terra text-[15px] font-semibold text-white shadow-sm transition-colors hover:bg-terra-hover disabled:opacity-45"
+                    className="flex h-12 flex-1 items-center justify-center gap-2 rounded-full pressable bg-terra text-[15px] font-semibold text-white shadow-sm transition-colors hover:bg-terra-hover disabled:opacity-45"
                   >
                     <Crosshair className="h-[18px] w-[18px]" />
                     Оценить
@@ -1216,7 +1216,7 @@ function AnswerPanel({
                 onClick={() => onGrade('good')}
                 disabled={!wasRight}
                 title={!wasRight ? '«Знаю» недоступно после ошибки' : undefined}
-                className="flex h-[52px] flex-1 items-center justify-center gap-2 rounded-xl bg-terra text-[15px] font-semibold text-white shadow-sm transition-all duration-200 hover:bg-terra-hover active:scale-[0.97] disabled:opacity-45"
+                className="flex h-[52px] flex-1 items-center justify-center gap-2 rounded-full pressable bg-terra text-[15px] font-semibold text-white shadow-sm transition-all duration-200 hover:bg-terra-hover active:scale-[0.97] disabled:opacity-45"
               >
                 <Check className="h-[18px] w-[18px]" />
                 Знаю
@@ -1390,21 +1390,21 @@ function PrecisionPanel({
             <button
               type="button"
               onClick={() => onGrade(auto)}
-              className="flex h-12 flex-1 items-center justify-center rounded-xl bg-terra px-4 text-[15px] font-semibold text-white shadow-sm transition-colors hover:bg-terra-hover"
+              className="flex h-12 flex-1 items-center justify-center rounded-full pressable bg-terra px-4 text-[15px] font-semibold text-white shadow-sm transition-colors hover:bg-terra-hover"
             >
               Согласен
             </button>
             <button
               type="button"
               onClick={() => onGrade('good')}
-              className="h-12 rounded-xl bg-surface-2 px-4 text-[15px] font-semibold transition-colors hover:bg-surface-3"
+              className="h-12 rounded-full pressable bg-surface-2 px-4 text-[15px] font-semibold transition-colors hover:bg-surface-3"
             >
               Я знаю
             </button>
             <button
               type="button"
               onClick={() => onGrade('bad')}
-              className="h-12 rounded-xl px-4 text-[15px] font-semibold text-ink-muted transition-colors hover:bg-[color:color-mix(in_srgb,var(--error)_14%,transparent)] hover:text-error"
+              className="h-12 rounded-full pressable px-4 text-[15px] font-semibold text-ink-muted transition-colors hover:bg-[color:color-mix(in_srgb,var(--error)_14%,transparent)] hover:text-error"
             >
               Не знаю
             </button>

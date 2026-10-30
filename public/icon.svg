@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <!-- Lingo Cards app icon (iOS 27 style): full-bleed square, the OS applies the squircle mask -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8E8BFF"/>
+      <stop offset="0.5" stop-color="#5856D6"/>
+      <stop offset="1" stop-color="#2E1F9E"/>
+    </linearGradient>
+    <radialGradient id="glowPink" cx="0.92" cy="0.95" r="0.6">
+      <stop offset="0" stop-color="#FF2D55" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#FF2D55" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowTop" cx="0.15" cy="0.05" r="0.7">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="back" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.38"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.12"/>
+    </linearGradient>
+    <linearGradient id="front" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#ECEBFF"/>
+    </linearGradient>
+    <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.95"/>
+      <stop offset="0.5" stop-color="#FFFFFF" stop-opacity="0.15"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.6"/>
+    </linearGradient>
+    <linearGradient id="ink" gradientUnits="userSpaceOnUse" x1="300" y1="420" x2="500" y2="700">
+      <stop offset="0" stop-color="#6A67F0"/>
+      <stop offset="1" stop-color="#3A2FC0"/>
+    </linearGradient>
+    <linearGradient id="coral" gradientUnits="userSpaceOnUse" x1="520" y1="500" x2="650" y2="700">
+      <stop offset="0" stop-color="#FF8A4C"/>
+      <stop offset="1" stop-color="#FF2D55"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="28" stdDeviation="34" flood-color="#1A0F6B" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+
+  <rect width="1024" height="1024" fill="url(#bg)"/>
+  <rect width="1024" height="1024" fill="url(#glowPink)"/>
+  <rect width="1024" height="1024" fill="url(#glowTop)"/>
+
+  <!-- back card: tinted glass -->
+  <g transform="rotate(11 560 520)">
+    <rect x="330" y="230" width="460" height="560" rx="88" fill="url(#back)"/>
+    <rect x="331.5" y="231.5" width="457" height="557" rx="86.5" fill="none" stroke="url(#rim)" stroke-width="3"/>
+  </g>
+
+  <!-- front card: frosted flashcard -->
+  <g transform="rotate(-7 470 560)" filter="url(#shadow)">
+    <rect x="240" y="280" width="460" height="560" rx="88" fill="url(#front)"/>
+    <rect x="241.5" y="281.5" width="457" height="557" rx="86.5" fill="none" stroke="#FFFFFF" stroke-width="3"/>
+    <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <!-- A -->
+      <path d="M318 690 L400 428 L482 690" stroke="url(#ink)" stroke-width="54"/>
+      <path d="M352 612 L448 612" stroke="url(#ink)" stroke-width="46"/>
+      <!-- я -->
+      <path d="M622 514 L622 690" stroke="url(#coral)" stroke-width="46"/>
+      <path d="M622 514 L580 514 A45 45 0 0 0 580 604 L622 604" stroke="url(#coral)" stroke-width="46"/>
+      <path d="M580 606 L546 690" stroke="url(#coral)" stroke-width="46"/>
+    </g>
+    <!-- definition lines -->
+    <rect x="318" y="748" width="230" height="20" rx="10" fill="#5856D6" fill-opacity="0.22"/>
+    <rect x="566" y="748" width="70" height="20" rx="10" fill="#5856D6" fill-opacity="0.12"/>
+  </g>
+</svg>
