@@ -1076,7 +1076,9 @@ function ChoiceOptions({
         const answered = phase === 'feedback';
         const dimmed = answered && !isCorrect && !isPicked;
         const bodyText = isTermChoice ? opt.term : opt.definition;
-        const clampable = !isTermChoice && opt.definition.length > 140;
+        // after answering, the correct option (and a wrong pick) are always shown in full
+        const autoExpanded = answered && (isCorrect || isPicked);
+        const clampable = !isTermChoice && opt.definition.length > 140 && !autoExpanded;
         const isExpanded = expanded.has(opt.id);
         return (
           <motion.button
@@ -1186,14 +1188,18 @@ function AnswerPanel({
         >
           <motion.div variants={{ hidden: { opacity: 0, y: 8 }, show: { opacity: 1, y: 0 } }}>
             {showDefinition ? (
-              <p className="font-display text-[17px] leading-[28px] font-normal">{term.definition}</p>
+              <div className="max-h-[45dvh] overflow-y-auto overscroll-contain pr-1">
+                <p className="font-display text-[17px] leading-[28px] font-normal">{term.definition}</p>
+              </div>
             ) : (
               <>
                 <p className="font-display text-[22px] font-semibold">{term.term}</p>
                 {term.etymology && (
                   <p className="mt-1 font-display text-[15px] text-ink-muted italic">{term.etymology}</p>
                 )}
-                <p className="mt-2 line-clamp-2 text-sm font-medium text-ink-muted">{term.definition}</p>
+                <div className="mt-2 max-h-[40dvh] overflow-y-auto overscroll-contain pr-1">
+                  <p className="text-[15px] leading-[24px] font-medium text-ink-muted">{term.definition}</p>
+                </div>
               </>
             )}
           </motion.div>
